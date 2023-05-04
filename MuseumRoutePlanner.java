@@ -19,11 +19,12 @@ public class MuseumRoutePlanner {
             System.out.println("2. Search for an exhibition");
             System.out.println("3. Generate a route through the museum");
             System.out.println("4. Exit");
+            System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+
             
 
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
-            System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 
 
             switch (choice) {
@@ -53,7 +54,8 @@ public class MuseumRoutePlanner {
         String location = scanner.next();
         Exhibition exhibition = new Exhibition(name, location);
         exhibitions.add(exhibition);
-        System.out.println(exhibition.getName() + " has been added to the museum.");
+        System.out.print("\033[2A\033[0J");
+        System.out.println("\"" + exhibition.getName() + "\"" + " has been added to the museum at location " + "\"" + exhibition.getLocation() + "\"");
         scanner.nextLine(); // Consume newline left-over
         System.out.println("Press enter to return to the menu.");
         scanner.nextLine(); // Wait for user to press enter
