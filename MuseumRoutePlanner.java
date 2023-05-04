@@ -34,7 +34,7 @@ public class MuseumRoutePlanner {
                     ExhibitionSearch.searchExhibition(exhibitions, scanner);
                     break;
                 case 3:
-                    // Call method to generate a route through the museum
+                    MuseumRouteGenerator.generateRoute(exhibitions);
                     break;
                 case 4:
                     System.out.println("Exiting program...");
