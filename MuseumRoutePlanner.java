@@ -1,10 +1,7 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class MuseumRoutePlanner {
-    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -12,29 +9,29 @@ public class MuseumRoutePlanner {
 
         int choice = 0;
         while (choice != 4) {
+            //clearConsole();
             System.out.println();
             System.out.println();
-            System.out.println(); //test1
+            System.out.println();
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.println("Welcome to the Museum Route Planner! Please select an option:");
             System.out.println("1. Add an exhibition");
             System.out.println("2. Search for an exhibition");
             System.out.println("3. Generate a route through the museum");
             System.out.println("4. Exit");
+            
 
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 
-            System.out.println();
-            System.out.println();
 
             switch (choice) {
                 case 1:
                     addExhibition(exhibitions, scanner);
                     break;
                 case 2:
-                    // Call method to search for an exhibition
+                    ExhibitionSearch.searchExhibition(exhibitions, scanner);
                     break;
                 case 3:
                     // Call method to generate a route through the museum
@@ -57,6 +54,13 @@ public class MuseumRoutePlanner {
         Exhibition exhibition = new Exhibition(name, location);
         exhibitions.add(exhibition);
         System.out.println(exhibition.getName() + " has been added to the museum.");
+        scanner.nextLine(); // Consume newline left-over
+        System.out.println("Press enter to return to the menu.");
+        scanner.nextLine(); // Wait for user to press enter
+    }
+
+    public static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
-
