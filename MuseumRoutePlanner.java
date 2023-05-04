@@ -14,7 +14,7 @@ public class MuseumRoutePlanner {
         while (choice != 4) {
             System.out.println();
             System.out.println();
-            System.out.println();
+            System.out.println(); //test1
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.println("Welcome to the Museum Route Planner! Please select an option:");
             System.out.println("1. Add an exhibition");
