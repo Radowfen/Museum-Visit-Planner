@@ -29,7 +29,7 @@ public class MuseumRoutePlanner {
 
             switch (choice) {
                 case 1:
-                    addExhibition(exhibitions, scanner);
+                    Exhibition.addExhibition(exhibitions, scanner);
                     break;
                 case 2:
                     ExhibitionSearch.searchExhibition(exhibitions, scanner);
@@ -47,19 +47,7 @@ public class MuseumRoutePlanner {
         }
     }
 
-    public static void addExhibition(ArrayList<Exhibition> exhibitions, Scanner scanner) {
-        System.out.print("Enter the name of the exhibition: ");
-        String name = scanner.next();
-        System.out.print("Enter the location of the exhibition: ");
-        String location = scanner.next();
-        Exhibition exhibition = new Exhibition(name, location);
-        exhibitions.add(exhibition);
-        System.out.print("\033[2A\033[0J");
-        System.out.println("\"" + exhibition.getName() + "\"" + " has been added to the museum at location " + "\"" + exhibition.getLocation() + "\"");
-        scanner.nextLine(); // Consume newline left-over
-        System.out.println("Press enter to return to the menu.");
-        scanner.nextLine(); // Wait for user to press enter
-    }
+    
 
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
