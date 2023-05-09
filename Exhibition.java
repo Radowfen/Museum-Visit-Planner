@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Exhibition {
@@ -36,3 +36,4 @@ public class Exhibition {
         scanner.nextLine(); // Wait for user to press enter
     }
 }
+*/
