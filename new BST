@@ -4,119 +4,131 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
 public class BST {
-
     private Node root;
-    public Map<Integer, String> roomNumbers = new HashMap<>();
+    private Map<Integer, String> roomNumbers;
 
-    private static class Node {
+    private class Node {
         private int value;
-        private Node left, right;
+        private Node left;
+        private Node right;
 
         public Node(int value) {
             this.value = value;
         }
     }
 
-    public void insert(int value, String roomNumber) {
-        roomNumbers.put(value, roomNumber);
-        root = insert(root, value);
+    public BST() {
+        roomNumbers = new HashMap<>();
+        roomNumbers.put(20, "K1");
+        roomNumbers.put(10, "R101");
+        roomNumbers.put(25, "K2");
+        roomNumbers.put(5, "R102");
+        roomNumbers.put(15, "R103");
+        roomNumbers.put(22, "R201");
+        roomNumbers.put(30, "R204");
+        roomNumbers.put(21, "R202");
+        roomNumbers.put(24, "R203");
+        roomNumbers.put(28, "R205");
+        roomNumbers.put(35, "R206");
     }
 
-    private Node insert(Node node, int value) {
-        if (node == null) {
-            return new Node(value);
-        }
-
-        if (value < node.value) {
-            node.left = insert(node.left, value);
-        } else if (value > node.value) {
-            node.right = insert(node.right, value);
-        }
-
-        return node;
+    public Node search(int roomNumber) {
+        return search(root, roomNumber);
     }
 
-    public Node search(int value) {
-        return search(root, value);
-    }
-
-    private Node search(Node node, int value) {
-        if (node == null || node.value == value) {
+    private Node search(Node node, int roomNumber) {
+        if (node == null || node.value == roomNumber) {
             return node;
         }
 
-        if (value < node.value) {
-            return search(node.left, value);
+        if (roomNumber < node.value) {
+            return search(node.left, roomNumber);
         } else {
-            return search(node.right, value);
+            return search(node.right, roomNumber);
         }
     }
 
-    public List<String> getPathTo(int value) {
+    public List<String> getPathTo(int roomNumber) {
         List<String> path = new ArrayList<>();
+        getPathTo(root, roomNumber, path);
+        return path;
+    }
 
-        Node node = root;
-        while (node != null) {
-            if (value < node.value) {
-                path.add(roomNumbers.get(node.value));
-                node = node.left;
-            } else if (value > node.value) {
-                path.add(roomNumbers.get(node.value));
-                node = node.right;
-            } else {
-                // found the node
-                path.add(roomNumbers.get(node.value));
-                break;
-            }
+    private boolean getPathTo(Node node, int roomNumber, List<String> path) {
+        if (node == null) {
+            return false;
         }
 
-        return path;
+        path.add(roomNumbers.get(node.value));
+
+        if (node.value == roomNumber) {
+            return true;
+        }
+
+        if (roomNumber < node.value && getPathTo(node.left, roomNumber, path)) {
+            return true;
+        }
+
+        if (roomNumber > node.value && getPathTo(node.right, roomNumber, path)) {
+            return true;
+        }
+
+        path.remove(roomNumbers.get(node.value));
+        return false;
+    }
+
+    public void insert(int roomNumber) {
+        root = insert(root, roomNumber);
+    }
+
+    private Node insert(Node node, int roomNumber) {
+        if (node == null) {
+            return new Node(roomNumber);
+        }
+
+        if (roomNumber < node.value) {
+            node.left = insert(node.left, roomNumber);
+        } else if (roomNumber > node.value) {
+            node.right = insert(node.right, roomNumber);
+        }
+
+        return node;
     }
 
     public static void main(String[] args) {
         BST bst = new BST();
 
         // insert nodes
-        bst.insert(20, "K1");
-        bst.insert(10, "R101");
-        bst.insert(25, "K2");
-        bst.insert(5, "R102");
-        bst.insert(15, "R103");
-        bst.insert(22, "R201");
-        bst.insert(30, "R204");
-        bst.insert(21, "R202");
-        bst.insert(24, "R203");
-        bst.insert(28, "R205");
-        bst.insert(35, "R206");
+        bst.insert(20);
+        bst.insert(10);
+        bst.insert(25);
+        bst.insert(5);
+        bst.insert(15);
+        bst.insert(22);
+        bst.insert(30);
+        bst.insert(21);
+        bst.insert(24);
+        bst.insert(28);
+        bst.insert(35);
 
-        // scan the requested room number or floor from the user
+         // search for a node
+         Node node = bst.search(28);
+         if (node != null) {
+             System.out.println("Found node with value " + bst.roomNumbers.get(node.value));
+         } else {
+             System.out.println("Node not found");
+         }
+
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the room number or floor: ");
-        String input = scanner.nextLine();
-
-        // convert input to integer
-        int value = Integer.parseInt(input);
-
-        // search for a node
-        Node node = bst.search(value);
-        if (node != null) {
-            System.out.println("Found node with value " + bst.roomNumbers.get(node.value));
-        } else {
-            System.out.println("Node not found");
-        }
-        
-        // find the path to a node
-        List<String> path = bst.getPathTo(value);
-        if (path.size() > 0) {
-            System.out.print("Path to room number " + value + ": ");
-            for (String room : path) {
-                System.out.print(room + " -> ");
-            }
-            System.out.println("END");
+        System.out.print("Enter room number to find path to: ");
+        int roomNumber = scanner.nextInt();
+        List<String> path = bst.getPathTo(roomNumber);
+        if (!path.isEmpty()) {
+            System.out.println("Path to room number " + roomNumber + ": " + String.join(" -> ", path) + " -> END");
         } else {
             System.out.println("Path not found");
         }
+
     }
 }
