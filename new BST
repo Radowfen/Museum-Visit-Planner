@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.util.ArrayList; //WORKS
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner; //TEST2
+import java.util.Scanner;
 
 public class BST {
     private Node root;
@@ -98,7 +98,7 @@ public class BST {
 
     public static void main(String[] args) {
         BST bst = new BST();
-
+    
         // insert nodes
         bst.insert(20);
         bst.insert(10);
@@ -111,24 +111,31 @@ public class BST {
         bst.insert(24);
         bst.insert(28);
         bst.insert(35);
-
-         // search for a node
-         Node node = bst.search(28);
-         if (node != null) {
-             System.out.println("Found node with value " + bst.roomNumbers.get(node.value));
-         } else {
-             System.out.println("Node not found");
-         }
-
+    
+        Map<String, Integer> roomNumbersReverse = new HashMap<>();
+        roomNumbersReverse.put("K1", 20);
+        roomNumbersReverse.put("R101", 10);
+        roomNumbersReverse.put("K2", 25);
+        roomNumbersReverse.put("R102", 5);
+        roomNumbersReverse.put("R103", 15);
+        roomNumbersReverse.put("R201", 22);
+        roomNumbersReverse.put("R204", 30);
+        roomNumbersReverse.put("R202", 21);
+        roomNumbersReverse.put("R203", 24);
+        roomNumbersReverse.put("R205", 28);
+        roomNumbersReverse.put("R206", 35);
+    
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter room number to find path to: ");
-        int roomNumber = scanner.nextInt();
-        List<String> path = bst.getPathTo(roomNumber);
-        if (!path.isEmpty()) {
-            System.out.println("Path to room number " + roomNumber + ": " + String.join(" -> ", path) + " -> END");
+        String roomName = scanner.next();
+        int roomNumber = roomNumbersReverse.getOrDefault(roomName, -1);
+        if (roomNumber == -1) {
+            System.out.println("Room not found");
         } else {
-            System.out.println("Path not found");
+            List<String> path = bst.getPathTo(roomNumber);
+            System.out.println("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END");
         }
-
     }
+    
+    
 }
