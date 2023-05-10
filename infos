@@ -1,19 +1,9 @@
-There are 8 paintings in a museum
-
-Their distances to visitor:
-
-paintA = 30m
-paintB = 60m
-paintC = 5m
-paintD = 15m
-paintE = 40m
-paintF = 100m
-paintG = 80m
-paintH = 25m
-
-
-
-
-
-On console, user will select which paintings to visit. Using linked list and binary search tree algorithms, create a Java code that outputs the user to which paintings to visit in order for shortening the walk distance.
-
+                 15
+                /  \
+              10    20
+             /  \   / \
+            8   12 17  25
+           / \    /
+          5   9  16
+               /   \
+              11   19
