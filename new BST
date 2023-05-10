@@ -1,4 +1,4 @@
-import java.util.ArrayList; //WORKS
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,16 +126,23 @@ public class BST {
         roomNumbersReverse.put("R206", 35);
     
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter room number to find path to: ");
-        String roomName = scanner.next();
-        int roomNumber = roomNumbersReverse.getOrDefault(roomName, -1);
-        if (roomNumber == -1) {
-            System.out.println("Room not found");
-        } else {
-            List<String> path = bst.getPathTo(roomNumber);
-            System.out.println("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END");
+        boolean keepGoing = true;
+        while (keepGoing) {
+            System.out.print("Enter room number to find path to: ");
+            String roomName = scanner.next();
+            int roomNumber = roomNumbersReverse.getOrDefault(roomName, -1);
+            if (roomNumber == -1) {
+                System.out.println("Room not found");
+            } else {
+                List<String> path = bst.getPathTo(roomNumber);
+                System.out.println("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END");
+            }
+            System.out.print("Do you want to find another room? (y/n): ");
+            String answer = scanner.next();
+            keepGoing = answer.equalsIgnoreCase("y");
         }
     }
+    
     
     
 }
