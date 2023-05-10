@@ -68,8 +68,8 @@ class BST {
         
         System.out.println("Inorder Traversal: ");
         bst.inorderTraversal();
-        System.out.println("\nSearch for 17: " + bst.search(17));
-        System.out.println("Search for 13: " + bst.search(13));
+        System.out.println("\nSearch for 17: " + bst.search(17)); //True
+        System.out.println("Search for 13: " + bst.search(13)); //False
     }
 
 }
