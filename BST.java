@@ -135,7 +135,7 @@ public class BST {
                 System.out.println("Room not found");
             } else {
                 List<String> path = bst.getPathTo(roomNumber);
-                System.out.println("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END");
+                System.out.println("Path to room " + roomName + ": " + String.join(" -> ", path) + " | END");
             }
             System.out.print("Do you want to find another room? (y/n): ");
             String answer = scanner.next();

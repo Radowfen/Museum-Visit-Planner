@@ -43,37 +43,42 @@ public class BSTApp extends JFrame implements ActionListener {
         
         artAndArtistsNames.add("Hoca Ali Rıza - Lakeside (R102)");
         artAndArtistsNames.add("Şeker Ahmet Paşa - Pomegranates and Quinces (R102)");
-        artAndArtistsNames.add("Osman Hamdi Bey - Turtle Trainer(R103)");
+        artAndArtistsNames.add("Osman Hamdi Bey - Turtle Trainer (R103)");
         artAndArtistsNames.add("İbrahim Çallı - Üsküdar (R201)");
         artAndArtistsNames.add("Bedri Rahmi Eyüboğlu - Tophane (R204)");
         artAndArtistsNames.add("Mahmut Cuda - Sara (R204)");
         artAndArtistsNames.add("Feyhaman Duran - Mr. Celaleddin Arif (R202)");
-        artAndArtistsNames.add("Fikret Mualla - Jazz Orchestra(R203)");
-        artAndArtistsNames.add("Nazmi Ziya Güran - Street View(R203)");
+        artAndArtistsNames.add("Fikret Mualla - Jazz Orchestra (R203)");
+        artAndArtistsNames.add("Nazmi Ziya Güran - Street View (R203)");
         artAndArtistsNames.add("Nuri İyem - Three Beauties (R203)");
         artAndArtistsNames.add("Namık İsmail - Woman Lying on Cedar (R201)");
         artAndArtistsNames.add("Hale Asaf - Self Portrait (R102)");
         artAndArtistsNames.add("Abidin Dino - Long Walk (R206)");
-        artAndArtistsNames.add("İbrahim Balaban - Blend(R205)");
-        artAndArtistsNames.add("Nurullah Berk - Ironing Woman(R103)");
+        artAndArtistsNames.add("İbrahim Balaban - Blend (R205)");
+        artAndArtistsNames.add("Nurullah Berk - Ironing Woman (R103)");
         artAndArtistsNames.add("Avni Arbaş - Equestrian (R206)");
+        artAndArtistsNames.add("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 
         // Set up UI components
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         getContentPane().add(panel);
-
         
 
         
+
         
+
 
         
         JLabel label = new JLabel("Enter a room name ");
+
         //label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 200)); // add left padding
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel.add(label);
+
+
         
 
         
@@ -93,14 +98,34 @@ public class BSTApp extends JFrame implements ActionListener {
      
         // Set up text field for room number
         JPanel roomNumberPanel = new JPanel();
-        roomNumberPanel.setMaximumSize(new Dimension(200, 50));
+        roomNumberPanel.setMaximumSize(new Dimension(200, 80));
         roomNumberPanel.setLayout(new BorderLayout());
+
+
         JButton button = new JButton("Enter");
         button.addActionListener(this);
         roomNumberPanel.add(button);
         panel.add(roomNumberPanel);
 
         
+
+
+        JButton displayArtButton = new JButton("Display Artworks");
+        displayArtButton.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                String listElements = "";
+                for (String element : artAndArtistsNames) {
+                    listElements += element + "\n";
+                }
+                textArea.setText(listElements);
+                
+            }
+        });
+
+        displayArtButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(displayArtButton);
+
 
 
         
@@ -110,23 +135,19 @@ public class BSTApp extends JFrame implements ActionListener {
         textAreaPanel.setLayout(new BorderLayout());
         textArea = new JTextArea(10, 20);
         textArea.setEditable(false);
+
         JScrollPane scrollPane = new JScrollPane(textArea);
         textAreaPanel.add(scrollPane, BorderLayout.CENTER);
         panel.add(textAreaPanel);
 
-        JButton displayButton = new JButton("Display Artworks");
 
 
-        displayButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String listElements = "";
-                for (String element : artAndArtistsNames) {
-                    listElements += element + "\n";
-                }
-                textArea.setText(listElements);
-            }
-        });
-        panel.add(displayButton);
+        
+
+        
+
+        
+        
 
 
    
@@ -188,7 +209,7 @@ public class BSTApp extends JFrame implements ActionListener {
 
         } else {
             List<String> path = bst.getPathTo(roomNumber);
-            textArea.append("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END\n");
+            textArea.append("Path to room " + roomName + ": " + String.join(" -> ", path) + " | END\n");
 
             // Load the new image based on the room name
             String imageUrl = getImageUrl(roomName);
@@ -257,6 +278,7 @@ public class BSTApp extends JFrame implements ActionListener {
             case "R102":
                 return 5;
             case "R103":
+            case "MonaLisa":
                 return 15;
             case "R201":
                 return 22;
