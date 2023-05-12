@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
 public class BSTApp extends JFrame implements ActionListener {
 
     private BST bst;
+    private LinkedList<String> artAndArtistsNames;
     private JTextField textField;
     private JTextArea textArea;
     private JLabel imageLabel;
@@ -37,6 +39,25 @@ public class BSTApp extends JFrame implements ActionListener {
         bst.insert(28);
         bst.insert(35);
 
+        artAndArtistsNames = new LinkedList<String>();
+        
+        artAndArtistsNames.add("Hoca Ali Rıza - Lakeside (R102)");
+        artAndArtistsNames.add("Şeker Ahmet Paşa - Pomegranates and Quinces (R102)");
+        artAndArtistsNames.add("Osman Hamdi Bey - Turtle Trainer(R103)");
+        artAndArtistsNames.add("İbrahim Çallı - Üsküdar (R201)");
+        artAndArtistsNames.add("Bedri Rahmi Eyüboğlu - Tophane (R204)");
+        artAndArtistsNames.add("Mahmut Cuda - Sara (R204)");
+        artAndArtistsNames.add("Feyhaman Duran - Mr. Celaleddin Arif (R202)");
+        artAndArtistsNames.add("Fikret Mualla - Jazz Orchestra(R203)");
+        artAndArtistsNames.add("Nazmi Ziya Güran - Street View(R203)");
+        artAndArtistsNames.add("Nuri İyem - Three Beauties (R203)");
+        artAndArtistsNames.add("Namık İsmail - Woman Lying on Cedar (R201)");
+        artAndArtistsNames.add("Hale Asaf - Self Portrait (R102)");
+        artAndArtistsNames.add("Abidin Dino - Long Walk (R206)");
+        artAndArtistsNames.add("İbrahim Balaban - Blend(R205)");
+        artAndArtistsNames.add("Nurullah Berk - Ironing Woman(R103)");
+        artAndArtistsNames.add("Avni Arbaş - Equestrian (R206)");
+
         // Set up UI components
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -44,6 +65,7 @@ public class BSTApp extends JFrame implements ActionListener {
 
         
 
+        
         
 
         
@@ -78,6 +100,8 @@ public class BSTApp extends JFrame implements ActionListener {
         roomNumberPanel.add(button);
         panel.add(roomNumberPanel);
 
+        
+
 
         
         // Set up text area for output
@@ -90,6 +114,22 @@ public class BSTApp extends JFrame implements ActionListener {
         textAreaPanel.add(scrollPane, BorderLayout.CENTER);
         panel.add(textAreaPanel);
 
+        JButton displayButton = new JButton("Display Artworks");
+
+
+        displayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String listElements = "";
+                for (String element : artAndArtistsNames) {
+                    listElements += element + "\n";
+                }
+                textArea.setText(listElements);
+            }
+        });
+        panel.add(displayButton);
+
+
+   
 
         BufferedImage image = null;
         String imageUrl = "https://drive.google.com/uc?export=download&id=1hMFUv5Ace4Ub6FxcWxm7ZJLelJRkTa1x";
