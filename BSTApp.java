@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Scanner;
 
 
 import java.awt.image.BufferedImage;
@@ -91,8 +92,17 @@ public class BSTApp extends JFrame implements ActionListener {
 
 
         BufferedImage image = null;
+        String imageUrl = "https://drive.google.com/uc?export=download&id=1hMFUv5Ace4Ub6FxcWxm7ZJLelJRkTa1x";
+
         try {
-            URL url = new URL("https://drive.google.com/uc?export=download&id=1APWoxeCGnYpBf6bLHgg8LWJzCSVYP4BE");
+            String userInput = textField.getText().trim();
+            imageUrl = "https://drive.google.com/uc?export=download&id=1hMFUv5Ace4Ub6FxcWxm7ZJLelJRkTa1x";
+            
+            URL url = new URL(imageUrl);
+
+    
+
+
             image = ImageIO.read(url);
         
             // Scale the image down by 0.8
@@ -105,7 +115,9 @@ public class BSTApp extends JFrame implements ActionListener {
             g2d.dispose();
         
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            
+
         }
         
         // Create a JLabel with the scaled image
@@ -129,20 +141,78 @@ public class BSTApp extends JFrame implements ActionListener {
         int roomNumber = getRoomNumber(roomName);
         if (roomNumber == -1) {
             textArea.append("Room not found\n");
+            
+            
+
+            
+
         } else {
             List<String> path = bst.getPathTo(roomNumber);
             textArea.append("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END\n");
+
+            // Load the new image based on the room name
+            String imageUrl = getImageUrl(roomName);
+            BufferedImage image = null;
+            try {
+                URL url = new URL(imageUrl);
+                image = ImageIO.read(url);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            // Scale the image and update the image label
+            if (image != null) {
+                int newWidth = (int) (image.getWidth() * 0.8);
+                int newHeight = (int) (image.getHeight() * 0.8);
+                Image scaledImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+                image = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = image.createGraphics();
+                g2d.drawImage(scaledImage, 0, 0, null);
+                g2d.dispose();
+                imageLabel.setIcon(new ImageIcon(image));
+            }
         }
         textField.setText("");
     }
 
+    private String getImageUrl(String roomName) {
+        switch (roomName) {
+            case "F1":
+                return "https://drive.google.com/uc?export=download&id=1hMFUv5Ace4Ub6FxcWxm7ZJLelJRkTa1x";
+            case "F2":
+                return "https://drive.google.com/uc?export=download&id=1uSQhGc-D5An21rBOSlLYzodYkGTktVZi";
+            case "R101":
+                return "https://drive.google.com/uc?export=download&id=1mulq0Tv63Da3B-lJh4zdnSobQWfXfNpR";
+            case "R102":
+                return "https://drive.google.com/uc?export=download&id=1e45ypwc-JQSGNOv9HFFOch1Uij48arWW";
+            case "R103":
+                return "https://drive.google.com/uc?export=download&id=1418ZHRdfb9uSHoSKHjPQs_3SK1vDd1Sp";
+            case "R201":
+                return "https://drive.google.com/uc?export=download&id=1TONjYIB6ME0Tg6z4-dDeA3hS06dyd6l5";
+            case "R202":
+                return "https://drive.google.com/uc?export=download&id=1xwra1PI3LG1gUfw-kM69Y-50ISLbG-iQ";
+            case "R203":
+                return "https://drive.google.com/uc?export=download&id=19PHZdeOATdqRmM2xJwucF2lQFNo3RCsT";
+            case "R204":
+                return "https://drive.google.com/uc?export=download&id=1FwLPoeFwfnsczSErqXWxCkbgzNqmDBMh";
+            case "R205":
+                return "https://drive.google.com/uc?export=download&id=1hZPqOqR0YVM-f1K4lrnN8M8auhK8HHBG";
+            case "R206":
+                return "https://drive.google.com/uc?export=download&id=1XxFbReegiZCa8QTP0wVb97tOaDw7olt0";
+            default:
+                return null;
+        }
+    }
+    
+    
+
     private int getRoomNumber(String roomName) {
         switch (roomName) {
-            case "K1":
+            case "F1":
                 return 20;
             case "R101":
                 return 10;
-            case "K2":
+            case "F2":
                 return 25;
             case "R102":
                 return 5;
@@ -163,6 +233,7 @@ public class BSTApp extends JFrame implements ActionListener {
             default:
                 return -1;
         }
+        
     }
 
     public static void main(String[] args) {
