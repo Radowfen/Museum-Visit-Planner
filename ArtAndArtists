@@ -1,0 +1,29 @@
+import java.util.LinkedList;
+
+public class ArtAndArtists {
+    public static void main(String[] args) {
+        LinkedList<String> ArtAndArtistNames = new LinkedList<String>();
+
+        ArtAndArtistNames.add("Hoca Ali Rıza - Lakeside (R102)");
+        ArtAndArtistNames.add("Şeker Ahmet Paşa - Pomegranates and Quinces (R102)");
+        ArtAndArtistNames.add("Osman Hamdi Bey - Turtle Trainer(R103)");
+        ArtAndArtistNames.add("İbrahim Çallı - Üsküdar (R201)");
+        ArtAndArtistNames.add("Bedri Rahmi Eyüboğlu - Tophane (R204)");
+        ArtAndArtistNames.add("Mahmut Cuda - Sara (R204)");
+        ArtAndArtistNames.add("Feyhaman Duran - Mr. Celaleddin Arif (R202)");
+        ArtAndArtistNames.add("Fikret Mualla - Jazz Orchestra(R203)");
+        ArtAndArtistNames.add("Nazmi Ziya Güran - Street View(R203)");
+        ArtAndArtistNames.add("Nuri İyem - Three Beauties (R203)");
+        ArtAndArtistNames.add("Namık İsmail - Woman Lying on Cedar (R201)");
+        ArtAndArtistNames.add("Hale Asaf - Self Portrait (R102)");
+        ArtAndArtistNames.add("Abidin Dino - Long Walk (R206)");
+        ArtAndArtistNames.add("İbrahim Balaban - Blend(R205)");
+        ArtAndArtistNames.add("Nurullah Berk - Ironing Woman(R103)");
+        ArtAndArtistNames.add("Avni Arbaş - Equestrian (R206)");
+
+        /*for (String artist : ArtAndArtistNames) {
+            System.out.println(artist);
+        }
+        */
+    }
+}
