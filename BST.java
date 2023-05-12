@@ -20,9 +20,9 @@ public class BST {
 
     public BST() {
         roomNumbers = new HashMap<>();
-        roomNumbers.put(20, "K1");
+        roomNumbers.put(20, "F1");
         roomNumbers.put(10, "R101");
-        roomNumbers.put(25, "K2");
+        roomNumbers.put(25, "F2");
         roomNumbers.put(5, "R102");
         roomNumbers.put(15, "R103");
         roomNumbers.put(22, "R201");
@@ -113,9 +113,9 @@ public class BST {
         bst.insert(35);
     
         Map<String, Integer> roomNumbersReverse = new HashMap<>();
-        roomNumbersReverse.put("K1", 20);
+        roomNumbersReverse.put("F1", 20);
         roomNumbersReverse.put("R101", 10);
-        roomNumbersReverse.put("K2", 25);
+        roomNumbersReverse.put("F2", 25);
         roomNumbersReverse.put("R102", 5);
         roomNumbersReverse.put("R103", 15);
         roomNumbersReverse.put("R201", 22);
