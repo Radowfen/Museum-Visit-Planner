@@ -1,76 +1,148 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
-class BST {
-    TreeNode root;
-    
+public class BST {
+    private Node root;
+    private Map<Integer, String> roomNumbers;
+
+    private class Node {
+        private int value;
+        private Node left;
+        private Node right;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
+
     public BST() {
-        root = null;
+        roomNumbers = new HashMap<>();
+        roomNumbers.put(20, "K1");
+        roomNumbers.put(10, "R101");
+        roomNumbers.put(25, "K2");
+        roomNumbers.put(5, "R102");
+        roomNumbers.put(15, "R103");
+        roomNumbers.put(22, "R201");
+        roomNumbers.put(30, "R204");
+        roomNumbers.put(21, "R202");
+        roomNumbers.put(24, "R203");
+        roomNumbers.put(28, "R205");
+        roomNumbers.put(35, "R206");
     }
-    
-    public void insert(int val) {
-        root = insertNode(root, val);
+
+    public Node search(int roomNumber) {
+        return search(root, roomNumber);
     }
-    
-    private TreeNode insertNode(TreeNode root, int val) {
-        if (root == null) {
-            return new TreeNode(val);
+
+    private Node search(Node node, int roomNumber) {
+        if (node == null || node.value == roomNumber) {
+            return node;
         }
-        if (val < root.val) {
-            root.left = insertNode(root.left, val);
-        } else if (val > root.val) {
-            root.right = insertNode(root.right, val);
+
+        if (roomNumber < node.value) {
+            return search(node.left, roomNumber);
+        } else {
+            return search(node.right, roomNumber);
         }
-        return root;
     }
-    
-    public boolean search(int val) {
-        return searchNode(root, val);
+
+    public List<String> getPathTo(int roomNumber) {
+        List<String> path = new ArrayList<>();
+        getPathTo(root, roomNumber, path);
+        return path;
     }
-    
-    private boolean searchNode(TreeNode root, int val) {
-        if (root == null) {
+
+    private boolean getPathTo(Node node, int roomNumber, List<String> path) {
+        if (node == null) {
             return false;
         }
-        if (root.val == val) {
+
+        path.add(roomNumbers.get(node.value));
+
+        if (node.value == roomNumber) {
             return true;
-        } else if (val < root.val) {
-            return searchNode(root.left, val);
-        } else {
-            return searchNode(root.right, val);
         }
-    }
-    
-    public void inorderTraversal() {
-        inorderTraversalHelper(root);
-    }
-    
-    private void inorderTraversalHelper(TreeNode root) {
-        if (root != null) {
-            inorderTraversalHelper(root.left);
-            System.out.print(root.val + " ");
-            inorderTraversalHelper(root.right);
+
+        if (roomNumber < node.value && getPathTo(node.left, roomNumber, path)) {
+            return true;
         }
+
+        if (roomNumber > node.value && getPathTo(node.right, roomNumber, path)) {
+            return true;
+        }
+
+        path.remove(roomNumbers.get(node.value));
+        return false;
+    }
+
+    public void insert(int roomNumber) {
+        root = insert(root, roomNumber);
+    }
+
+    private Node insert(Node node, int roomNumber) {
+        if (node == null) {
+            return new Node(roomNumber);
+        }
+
+        if (roomNumber < node.value) {
+            node.left = insert(node.left, roomNumber);
+        } else if (roomNumber > node.value) {
+            node.right = insert(node.right, roomNumber);
+        }
+
+        return node;
     }
 
     public static void main(String[] args) {
         BST bst = new BST();
-        bst.insert(15);
-        bst.insert(10);
+    
+        // insert nodes
         bst.insert(20);
-        bst.insert(8);
-        bst.insert(12);
-        bst.insert(17);
+        bst.insert(10);
         bst.insert(25);
         bst.insert(5);
-        bst.insert(9);
-        bst.insert(16);
-        bst.insert(11);
-        bst.insert(19);
-        
-        System.out.println("Inorder Traversal: ");
-        bst.inorderTraversal();
-        System.out.println("\nSearch for 17: " + bst.search(17)); //True
-        System.out.println("Search for 13: " + bst.search(13)); //False
+        bst.insert(15);
+        bst.insert(22);
+        bst.insert(30);
+        bst.insert(21);
+        bst.insert(24);
+        bst.insert(28);
+        bst.insert(35);
+    
+        Map<String, Integer> roomNumbersReverse = new HashMap<>();
+        roomNumbersReverse.put("K1", 20);
+        roomNumbersReverse.put("R101", 10);
+        roomNumbersReverse.put("K2", 25);
+        roomNumbersReverse.put("R102", 5);
+        roomNumbersReverse.put("R103", 15);
+        roomNumbersReverse.put("R201", 22);
+        roomNumbersReverse.put("R204", 30);
+        roomNumbersReverse.put("R202", 21);
+        roomNumbersReverse.put("R203", 24);
+        roomNumbersReverse.put("R205", 28);
+        roomNumbersReverse.put("R206", 35);
+    
+        Scanner scanner = new Scanner(System.in);
+        boolean keepGoing = true;
+        while (keepGoing) {
+            System.out.print("Enter room number to find path to: ");
+            String roomName = scanner.next();
+            int roomNumber = roomNumbersReverse.getOrDefault(roomName, -1);
+            if (roomNumber == -1) {
+                System.out.println("Room not found");
+            } else {
+                List<String> path = bst.getPathTo(roomNumber);
+                System.out.println("Path to room " + roomName + ": " + String.join(" -> ", path) + " -> END");
+            }
+            System.out.print("Do you want to find another room? (y/n): ");
+            String answer = scanner.next();
+            keepGoing = answer.equalsIgnoreCase("y");
+        }
     }
-
+    
+    
+    
 }
-

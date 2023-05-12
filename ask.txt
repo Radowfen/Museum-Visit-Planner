@@ -1,17 +1,19 @@
-/*import javax.swing.*;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class BSTUI extends JFrame implements ActionListener {
+public class BSTApp extends JFrame implements ActionListener {
 
     private BST bst;
     private JTextField textField;
     private JTextArea textArea;
 
-    public BSTUI() {
-        super("BST UI");
+    public BSTApp() {
+        super("BST App");
 
         // Create BST object
         bst = new BST();
@@ -28,29 +30,58 @@ public class BSTUI extends JFrame implements ActionListener {
         bst.insert(35);
 
         // Set up UI components
+
+        
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         getContentPane().add(panel);
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel label = new JLabel("Enter room name:");
-        panel.add(label);
+        
+        JLabel label = new JLabel("Enter a room name ");
+        //label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 200)); // add left padding
+        panel.add(label, CENTER_ALIGNMENT);
+        
 
+        
+        // Set up text field for room name
+        JPanel roomNamePanel = new JPanel();
+        roomNamePanel.setMaximumSize(new Dimension(200, 50));
+        roomNamePanel.setLayout(new BorderLayout());
         textField = new JTextField();
-        panel.add(textField);
+        roomNamePanel.add(textField, BorderLayout.CENTER);
 
+        panel.add(roomNamePanel);
+
+
+     
+        // Set up text field for room number
+        JPanel roomNumberPanel = new JPanel();
+        roomNumberPanel.setMaximumSize(new Dimension(200, 50));
+        roomNumberPanel.setLayout(new BorderLayout());
         JButton button = new JButton("Enter");
         button.addActionListener(this);
-        panel.add(button);
+        roomNumberPanel.add(button, BorderLayout.CENTER);
+        panel.add(roomNumberPanel);
 
-        textArea = new JTextArea(10, 30);
+
+        
+        // Set up text area for output
+        JPanel textAreaPanel = new JPanel();
+        textAreaPanel.setMaximumSize(new Dimension(500, 100));
+        textAreaPanel.setLayout(new BorderLayout());
+        textArea = new JTextArea(10, 20);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        panel.add(scrollPane);
+        textAreaPanel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(textAreaPanel);
+        
 
         // Set frame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(1200, 800);
         setVisible(true);
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -95,8 +126,7 @@ public class BSTUI extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new BSTUI();
+        new BSTApp();
     }
 
 }
-*/

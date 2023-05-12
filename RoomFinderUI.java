@@ -2,16 +2,21 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import javax.imageio.ImageIO;
 
-public class BSTUI extends JFrame implements ActionListener {
+public class RoomFinderUI extends JFrame implements ActionListener {
 
     private BST bst;
     private JTextField textField;
     private JTextArea textArea;
+    private JLabel imageLabel;
 
-    public BSTUI() {
-        super("BST UI");
+    public RoomFinderUI() {
+        super("Room Finder");
 
         // Create BST object
         bst = new BST();
@@ -35,6 +40,8 @@ public class BSTUI extends JFrame implements ActionListener {
         JLabel label = new JLabel("Enter room name:");
         panel.add(label);
 
+        
+
         textField = new JTextField();
         panel.add(textField);
 
@@ -47,10 +54,34 @@ public class BSTUI extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(textArea);
         panel.add(scrollPane);
 
+        // Load the image from the URL
+        BufferedImage image = null;
+        try {
+            URL url = new URL("https://drive.google.com/uc?export=download&id=1APWoxeCGnYpBf6bLHgg8LWJzCSVYP4BE");
+            image = ImageIO.read(url);
+
+            //old: https://drive.google.com/file/d/12XCUYNmj379ZmaFtH9QzzdIY4zIdKZU0/view?usp=share_link
+            //new: https://drive.google.com/file/d/1APWoxeCGnYpBf6bLHgg8LWJzCSVYP4BE/view?usp=share_link
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create a JLabel with the image
+        imageLabel = new JLabel(new ImageIcon(image));
+
+        // Create a JPanel and add the label to it
+        JPanel imagePanel = new JPanel();
+        imagePanel.add(imageLabel);
+
+        // Add the image panel to the main panel
+        panel.add(imagePanel);
+
         // Set frame properties
+        setSize(1200, 900);
+        setMinimumSize(new Dimension(800, 600));  // set minimum size of frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
-        setVisible(true);
+    setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -95,8 +126,29 @@ public class BSTUI extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new BSTUI();
+    BSTUI bstUI = new BSTUI();
+
+    // Load the image from the URL
+    BufferedImage image = null;
+    try {
+        URL url = new URL("https://drive.google.com/uc?export=download&id=1APWoxeCGnYpBf6bLHgg8LWJzCSVYP4BE");
+        image = ImageIO.read(url); 
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
     }
 
+    // Create a JLabel with the image
+    JLabel label = new JLabel(new ImageIcon(image));
+
+    // Create a JPanel and add the label to it
+    JPanel panel = new JPanel();
+    panel.add(label);
+
+    // Add the panel to the existing BSTUI frame
+    bstUI.getContentPane().add(panel, BorderLayout.SOUTH);
+    }
+
+   
 }
 */

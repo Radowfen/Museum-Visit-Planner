@@ -7,3 +7,14 @@
           5   9  16
                /   \
               11   19
+
+
+
+              public Node search(String tagValue) {
+                for (Map.Entry<Integer, String> entry : roomNumbers.entrySet()) {
+                    if (entry.getValue().equals(tagValue)) {
+                        return search(root, entry.getKey());
+                    }
+                }
+                return null;
+            }
