@@ -11,13 +11,13 @@ VALUES ('3', 'David', 'Johnson', '45678901237');
 
 -- movies
 INSERT INTO "Movie" ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
-VALUES ('1', 'Inception', 'Christopher Nolan', 'Thriller', '2010', '9');
+VALUES ('1', 'Inception', 'Christopher Nolan', 'Thriller', DATE '2017-06-21', '9');
 
 INSERT INTO "Movie" ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
-VALUES ('2', 'The Shawshank Redemption', 'Frank Darabont', 'Drama', '1994', '8');
+VALUES ('2', 'The Shawshank Redemption', 'Frank Darabont', 'Drama', DATE '2015-01-11', '8');
 
 INSERT INTO "Movie" ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
-VALUES ('3', 'The Matrix', 'Lana Wachowski', 'Action', '1999', '8');
+VALUES ('3', 'The Matrix', 'Lana Wachowski', 'Action', DATE '2012-03-15', '8');
 
 
 -- songs
@@ -33,13 +33,13 @@ VALUES ('3', 'Someone Like You', 'Adele', '21', 'Pop', '2011');
 
 -- purchase
 INSERT INTO "Purchase" ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
-VALUES ('1', '1', '2', '3', TO_DATE('2023-05-22', 'YYYY-MM-DD'), 1, 'Digital');
+VALUES ('1', '1', '2', '3', DATE '2023-05-15', 1, 'Digital');
 
 INSERT INTO "Purchase" ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
-VALUES ('2', '2', '1', '2', TO_DATE('2023-05-21', 'YYYY-MM-DD'), 2, 'Physical');
+VALUES ('2', '2', '1', '2',DATE '2023-05-18', 2, 'Physical');
 
 INSERT INTO "Purchase" ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
-VALUES ('3', '3', '3', '1', TO_DATE('2023-05-20', 'YYYY-MM-DD'), 1, 'Digital');
+VALUES ('3', '3', '3', '1', DATE '2023-05-19', 1, 'Digital');
 
 
 -- store
