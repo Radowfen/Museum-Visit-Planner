@@ -62,3 +62,13 @@ VALUES ('2', 'Music World Distributors', '456 Oak Avenue');
 
 INSERT INTO "Supplier" ("SupplierID", "Name", "Address")
 VALUES ('3', 'Movie Magic Suppliers', '394 York Street');
+
+--inventory
+INSERT INTO Inventory ("StoreID", "InventoryID", "MovieID", "SongID", "StockQuantity")
+VALUES (1, 1, 123, NULL, 50);
+
+INSERT INTO Inventory ("StoreID", "InventoryID", "MovieID", "SongID", "StockQuantity")
+VALUES (2, 2, NULL, 456, 100);
+
+INSERT INTO Inventory ("StoreID", "InventoryID", "MovieID", "SongID", "StockQuantity")
+VALUES (2, 2, NULL, 456, 100);
