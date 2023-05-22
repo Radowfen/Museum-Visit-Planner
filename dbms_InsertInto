@@ -1,64 +1,64 @@
 -- customers
-INSERT INTO Customer (CustomerID, FirstName, LastName, Phone)
+INSERT INTO Customer ("CustomerID", "FirstName", "LastName", "Phone")
 VALUES ('1', 'John', 'Doe', '1234567890');
 
-INSERT INTO Customer (CustomerID, FirstName, LastName, Phone)
+INSERT INTO Customer ("CustomerID", "FirstName", "LastName", "Phone")
 VALUES ('2', 'Jane', 'Smith', '9876543210');
 
-INSERT INTO Customer (CustomerID, FirstName, LastName, Phone)
+INSERT INTO Customer ("CustomerID", "FirstName", "LastName", "Phone")
 VALUES ('3', 'David', 'Johnson', '4567890123');
 
 
 -- movies
-INSERT INTO Movie (MovieID, Title, Director, Genre, ReleaseYear, Rating)
+INSERT INTO Movie ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
 VALUES ('1', 'Inception', 'Christopher Nolan', 'Thriller', '2010', 'PG-13');
 
-INSERT INTO Movie (MovieID, Title, Director, Genre, ReleaseYear, Rating)
+INSERT INTO Movie ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
 VALUES ('2', 'The Shawshank Redemption', 'Frank Darabont', 'Drama', '1994', 'R');
 
-INSERT INTO Movie (MovieID, Title, Director, Genre, ReleaseYear, Rating)
+INSERT INTO Movie ("MovieID", "Title", "Director", "Genre", "ReleaseYear", "Rating")
 VALUES ('3', 'The Matrix', 'Lana Wachowski', 'Action', '1999', 'R');
 
 
 -- songs
-INSERT INTO Song (SongID, Title, Artist, Album, Genre, ReleaseYear)
+INSERT INTO Song ("SongID", "Title", "Artist", "Album", "Genre", "ReleaseYear")
 VALUES ('1', 'Shape of You', 'Ed Sheeran', '÷', 'Pop', '2017');
 
-INSERT INTO Song (SongID, Title, Artist, Album, Genre, ReleaseYear)
+INSERT INTO Song ("SongID", "Title", "Artist", "Album", "Genre", "ReleaseYear")
 VALUES ('2', 'Bohemian Rhapsody', 'Queen', 'A Night at the Opera', 'Rock', '1975');
 
-INSERT INTO Song (SongID, Title, Artist, Album, Genre, ReleaseYear)
+INSERT INTO Song ("SongID", "Title", "Artist", "Album", "Genre", "ReleaseYear")
 VALUES ('3', 'Someone Like You', 'Adele', '21', 'Pop', '2011');
 
 
 -- purchase
-INSERT INTO Purchase (PurchaseID, CustomerID, MovieID, SongID, PurchaseDate, Quantity, Field)
+INSERT INTO Purchase ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
 VALUES ('1', '1', '2', '3', TO_DATE('2023-05-22', 'YYYY-MM-DD'), 1, 'Digital');
 
-INSERT INTO Purchase (PurchaseID, CustomerID, MovieID, SongID, PurchaseDate, Quantity, Field)
+INSERT INTO Purchase ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
 VALUES ('2', '2', '1', '2', TO_DATE('2023-05-21', 'YYYY-MM-DD'), 2, 'Physical');
 
-INSERT INTO Purchase (PurchaseID, CustomerID, MovieID, SongID, PurchaseDate, Quantity, Field)
+INSERT INTO Purchase ("PurchaseID", "CustomerID", "MovieID", "SongID", "PurchaseDate", "Quantity", "Field")
 VALUES ('3', '3', '3', '1', TO_DATE('2023-05-20', 'YYYY-MM-DD'), 1, 'Digital');
 
 
 -- store
-INSERT INTO Store (StoreID, Name, Location, Phone, Website)
+INSERT INTO Store ("StoreID", "Name", "Location", "Phone", "Website")
 VALUES ('1', 'Best Movies', 'New York', '123-456-7890', 'www.bestmovies.com');
 
-INSERT INTO Store (StoreID, Name, Location, Phone, Website)
+INSERT INTO Store ("StoreID", "Name", "Location", "Phone", "Website")
 VALUES ('2', 'Music Galore', 'Los Angeles', '987-654-3210', 'www.musicgalore.com');
 
-INSERT INTO Store (StoreID, Name, Location, Phone, Website)
+INSERT INTO Store ("StoreID", "Name", "Location", "Phone", "Website")
 VALUES ('3', 'CineMusic', 'London', '456-789-0123', 'www.cinemusic.co.uk');
 
 
 -- supplier
-INSERT INTO Supplier (SupplierID, Name, Address)
+INSERT INTO Supplier ("SupplierID", "Name", "Address")
 VALUES ('1', 'ABC Media Supplies', '123 Main Street');
 
-INSERT INTO Supplier (SupplierID, Name, Address)
+INSERT INTO Supplier ("SupplierID", "Name", "Address")
 VALUES ('2', 'Music World Distributors', '456 Oak Avenue');
 
-INSERT INTO Supplier (SupplierID, Name, Address)
+INSERT INTO Supplier ("SupplierID", "Name", "Address")
 VALUES ('3', 'Movie Magic Suppliers',
