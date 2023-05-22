@@ -1,0 +1,55 @@
+SELECT DISTINCT c.FirstName, c.LastName
+FROM Customer c
+INNER JOIN Purchase p ON c.CustomerID = p.CustomerID
+INNER JOIN Movie m ON p.MovieID = m.MovieID
+INNER JOIN Song s ON p.SongID = s.SongID;
+
+SELECT DISTINCT m.Title AS MovieTitle, s.Title AS SongTitle
+FROM Customer c
+INNER JOIN Purchase p ON c.CustomerID = p.CustomerID
+INNER JOIN Movie m ON p.MovieID = m.MovieID
+INNER JOIN Song s ON p.SongID = s.SongID
+WHERE c.LastName = 'Smith';
+
+SELECT FirstName, LastName
+FROM Customer
+WHERE CustomerID IN (
+    SELECT p.CustomerID
+    FROM Purchase p
+    INNER JOIN Movie m ON p.MovieID = m.MovieID
+    WHERE m.Rating = (
+        SELECT MAX(Rating)
+        FROM Movie
+    )
+);
+
+SELECT Title
+FROM Song
+WHERE Genre = 'Pop' AND ReleaseYear = (
+    SELECT ReleaseYear
+    FROM Movie
+    WHERE Title = 'Inception'
+);
+
+SELECT Title
+FROM Movie
+UNION
+SELECT Title
+FROM Song;
+
+SELECT Genre
+FROM Movie
+INTERSECT
+SELECT Genre
+FROM Song;
+
+SELECT c.FirstName, c.LastName, COUNT(*) AS TotalPurchases
+FROM Customer c
+INNER JOIN Purchase p ON c.CustomerID = p.CustomerID
+GROUP BY c.FirstName, c.LastName;
+
+SELECT s.Name AS StoreName, AVG(i.StockQuantity) AS AvgStockQuantity
+FROM Store s
+INNER JOIN Inventory i ON s.StoreID = i.StoreID
+INNER JOIN Movie m ON i.MovieID = m.MovieID
+GROUP BY s.Name;
