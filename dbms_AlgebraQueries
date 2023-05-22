@@ -1,0 +1,15 @@
+Result := π FirstName, LastName (σ Rating = 'PG-13' (Customer ⨝ Purchase ⨝ Movie))
+
+Result := Customer × Movie
+
+Result := π Title (σ Genre = 'Action' (Movie)) ∪ π Title (σ Rating = 'R' (Movie))
+
+Result := π CustomerID (Purchase) ∩ π CustomerID (Purchase ⨝ Song)
+
+Result := π Title (Movie) - π Title (σ Genre = 'Action' (Movie))
+
+Result := π CustomerID, PurchaseDate (Purchase ⨝ Song)
+
+Result := ρ MovieTitle/Title (Movie)
+
+Result := π CustomerID (Purchase) ÷ π MovieID (Movie)
