@@ -1,0 +1,7 @@
+{ c.CustomerID | ∃ p (Purchase(p) ∧ p.CustomerID = c.CustomerID ∧ ∃ m (Movie(m) ∧ p.MovieID = m.MovieID)) }
+
+{ c.CustomerID | ∀ m (Movie(m) → ∃ p (Purchase(p) ∧ p.CustomerID = c.CustomerID ∧ p.MovieID = m.MovieID)) }
+
+{ m.Title | ∃ p (Purchase(p) ∧ p.MovieID = m.MovieID) }
+
+{ m.Title | ∀ c (Customer(c) → ∃ p (Purchase(p) ∧ p.MovieID = m.MovieID ∧ p.CustomerID = c.CustomerID)) }
