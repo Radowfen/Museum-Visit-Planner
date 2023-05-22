@@ -1,7 +1,46 @@
-{ c.CustomerID | ∃ p (Purchase(p) ∧ p.CustomerID = c.CustomerID ∧ ∃ m (Movie(m) ∧ p.MovieID = m.MovieID)) }
+--en az bir film satın alan müşteri
+SELECT DISTINCT c.CustomerID
+FROM Customer c
+WHERE EXISTS (
+    SELECT 1
+    FROM Purchase p
+    INNER JOIN Movie m ON p.MovieID = m.MovieID
+    WHERE p.CustomerID = c.CustomerID
+);
 
-{ c.CustomerID | ∀ m (Movie(m) → ∃ p (Purchase(p) ∧ p.CustomerID = c.CustomerID ∧ p.MovieID = m.MovieID)) }
+--tüm filmleri satın alan müşteri
+SELECT DISTINCT c.CustomerID
+FROM Customer c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Movie m
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Purchase p
+        WHERE p.CustomerID = c.CustomerID AND p.MovieID = m.MovieID
+    )
+);
 
-{ m.Title | ∃ p (Purchase(p) ∧ p.MovieID = m.MovieID) }
+--en az bir adet satılan filmler
+SELECT DISTINCT m.Title
+FROM Movie m
+WHERE EXISTS (
+    SELECT 1
+    FROM Purchase p
+    WHERE p.MovieID = m.MovieID
+);
 
-{ m.Title | ∀ c (Customer(c) → ∃ p (Purchase(p) ∧ p.MovieID = m.MovieID ∧ p.CustomerID = c.CustomerID)) }
+--tüm müşterilerin satın aldığı filmler
+SELECT DISTINCT m.Title
+FROM Movie m
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Customer c
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Purchase p
+        WHERE p.CustomerID = c.CustomerID AND p.MovieID = m.MovieID
+    )
+);
+
+
