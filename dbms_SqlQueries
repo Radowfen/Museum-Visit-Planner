@@ -32,6 +32,14 @@ WHERE Genre = 'Pop' AND ReleaseYear = (
 );
 
 SELECT Title
+FROM Song
+WHERE Genre = 'Pop' AND ReleaseYear = (
+    SELECT ReleaseYear
+    FROM Movie
+    WHERE Title = 'Inception'
+);
+
+SELECT Title
 FROM Movie
 UNION
 SELECT Title
