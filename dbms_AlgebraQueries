@@ -1,15 +1,69 @@
-Result := π FirstName, LastName (σ Rating = 'PG-13' (Customer ⨝ Purchase ⨝ Movie))
+--Rating'i 'PG-13' olan filmleri satın alan müşterilerin adı ve soyadı:
+SELECT DISTINCT c.FirstName, c.LastName
+FROM Customer c
+INNER JOIN Purchase p ON c.CustomerID = p.CustomerID
+INNER JOIN Movie m ON p.MovieID = m.MovieID
+WHERE m.Rating = 'PG-13';
 
-Result := Customer × Movie
 
-Result := π Title (σ Genre = 'Action' (Movie)) ∪ π Title (σ Rating = 'R' (Movie))
+--Tüm müşterilerin tüm filmleriyle birleşimi:
+SELECT *
+FROM Customer, Movie;
 
-Result := π CustomerID (Purchase) ∩ π CustomerID (Purchase ⨝ Song)
+--'Action' türünde olan veya 'R' derecelendirmesine sahip filmlerin başlıkları:
+SELECT DISTINCT Title
+FROM Movie
+WHERE Genre = 'Action'
+UNION
+SELECT DISTINCT Title
+FROM Movie
+WHERE Rating = 'R';
 
-Result := π Title (Movie) - π Title (σ Genre = 'Action' (Movie))
+--Hem film hem de şarkı satın alan müşterilerin müşteri kimlikleri:
+SELECT DISTINCT p1.CustomerID
+FROM Purchase p1
+WHERE EXISTS (
+    SELECT 1
+    FROM Purchase p2
+    WHERE p1.CustomerID = p2.CustomerID
+    AND p2.SongID IS NOT NULL
+);
 
-Result := π CustomerID, PurchaseDate (Purchase ⨝ Song)
+--'Action' türünde olmayan filmlerin başlıkları:
+SELECT DISTINCT Title
+FROM Movie
+WHERE Title NOT IN (
+    SELECT DISTINCT Title
+    FROM Movie
+    WHERE Genre = 'Action'
+);
 
-Result := ρ MovieTitle/Title (Movie)
+--Şarkı ile satın alma işlemini birleştiren müşteri kimlikleri ve satın alma tarihleri:
+SELECT p.CustomerID, p.PurchaseDate
+FROM Purchase p
+INNER JOIN Song s ON p.SongID = s.SongID;
 
-Result := π CustomerID (Purchase) ÷ π MovieID (Movie)
+--'Movie' tablosundaki 'Title' sütununu 'MovieTitle' olarak yeniden adlandırma:
+SELECT MovieID, Title AS MovieTitle, Director, Genre, ReleaseYear, Rating
+FROM Movie;
+
+--Tüm filmleri satın alan müşterilerin müşteri kimlikleri:
+SELECT DISTINCT p1.CustomerID
+FROM Purchase p1
+WHERE NOT EXISTS (
+    SELECT m.MovieID
+    FROM Movie m
+    WHERE NOT EXISTS (
+        SELECT p2.MovieID
+        FROM Purchase p2
+        WHERE p1.CustomerID = p2.CustomerID
+        AND p2.MovieID = m.MovieID
+    )
+);
+
+
+
+
+
+
+
