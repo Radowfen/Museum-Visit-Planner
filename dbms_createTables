@@ -1,0 +1,74 @@
+CREATE TABLE Customer (
+  CustomerID Type,
+  FirstName Type,
+  LastName Type,
+  Phone Type,
+  PRIMARY KEY (CustomerID),
+  KEY Key (FirstName, LastName, Phone)
+);
+
+CREATE TABLE Movie (
+  MovieID Type,
+  Title Type,
+  Director Type,
+  Genre Type,
+  ReleaseYear Type,
+  Rating Type,
+  PRIMARY KEY (MovieID),
+  KEY Key (Title, Director, Genre, ReleaseYear, Rating)
+);
+
+CREATE TABLE Song (
+  SongID Type,
+  Title Type,
+  Artist Type,
+  Album Type,
+  Genre Type,
+  ReleaseYear Type,
+  PRIMARY KEY (SongID),
+  KEY Key (Title, Artist, Album, Genre, ReleaseYear)
+);
+
+CREATE TABLE Purchase (
+  PurchaseID Type,
+  CustomerID Type,
+  MovieID Type,
+  SongID Type,
+  PurchaseDate Type,
+  Quantity Type,
+  Field Type,
+  PRIMARY KEY (PurchaseID),
+  FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+  FOREIGN KEY (MovieID) REFERENCES Movie(MovieID),
+  FOREIGN KEY (SongID) REFERENCES Song(SongID),
+  KEY Key (PurchaseDate, Quantity, Field)
+);
+
+CREATE TABLE Store (
+  StoreID Type,
+  Name Type,
+  Location Type,
+  Phone Type,
+  Website Type,
+  PRIMARY KEY (StoreID),
+  KEY Key (Name, Location, Phone, Website)
+);
+
+CREATE TABLE Inventory (
+  StoreID Type,
+  InventoryID Type,
+  MovieID Type,
+  SongID Type,
+  StockQuantity Type,
+  PRIMARY KEY (InventoryID),
+  FOREIGN KEY (StoreID) REFERENCES Store(StoreID),
+  KEY Key (MovieID, SongID, StockQuantity)
+);
+
+CREATE TABLE Supplier (
+  SupplierID Type,
+  Name Type,
+  Address Type,
+  PRIMARY KEY (SupplierID),
+  KEY Key (Name, Address)
+);
